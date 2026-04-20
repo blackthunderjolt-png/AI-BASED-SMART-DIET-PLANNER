@@ -1,4 +1,4 @@
-export type DietGoal = "weight_loss" | "muscle_gain" | "vegan" | "healthy";
+export type DietGoal = "weight_loss" | "muscle_gain" | "vegan" | "healthy" | "fasting";
 
 export type RecipeTag = "lowcal" | "protein" | "vegan";
 
@@ -37,6 +37,10 @@ export const recipes: Recipe[] = [
   { name: "Shrimp Skewers", emoji: "🍤", time: "15 min", calories: 400, tag: "protein", tagLabel: "PROTEIN", goals: ["muscle_gain", "weight_loss"] },
   { name: "Sweet Potato Fries", emoji: "🍠", time: "30 min", calories: 450, tag: "lowcal", tagLabel: "LOW CAL", goals: ["healthy"] },
   { name: "Kale Smoothie", emoji: "🥬", time: "5 min", calories: 250, tag: "lowcal", tagLabel: "LOW CAL", goals: ["weight_loss", "vegan"] },
+  { name: "Green Tea", emoji: "🍵", time: "2 min", calories: 0, tag: "lowcal", tagLabel: "FASTING", goals: ["fasting"] },
+  { name: "Black Coffee", emoji: "☕", time: "2 min", calories: 0, tag: "lowcal", tagLabel: "FASTING", goals: ["fasting"] },
+  { name: "Herbal Tea", emoji: "🌿", time: "3 min", calories: 0, tag: "lowcal", tagLabel: "FASTING", goals: ["fasting"] },
+  { name: "Water with Lemon", emoji: "🍋", time: "1 min", calories: 5, tag: "lowcal", tagLabel: "FASTING", goals: ["fasting"] },
 ];
 
 export const goalLabels: Record<DietGoal | "all", string> = {
@@ -45,4 +49,5 @@ export const goalLabels: Record<DietGoal | "all", string> = {
   muscle_gain: "💪 Muscle Gain",
   vegan: "🌱 Vegan",
   healthy: "✨ Healthy",
+  fasting: "⏰ Fasting",
 };

@@ -15,6 +15,7 @@ const goals: { v: DietGoal; label: string }[] = [
   { v: "muscle_gain", label: "💪 Muscle Gain" },
   { v: "vegan", label: "🌱 Vegan" },
   { v: "healthy", label: "✨ Healthy" },
+  { v: "fasting", label: "⏰ Fasting" },
 ];
 
 const goalNames: Record<DietGoal, string> = {
@@ -22,6 +23,7 @@ const goalNames: Record<DietGoal, string> = {
   muscle_gain: "Muscle Gain",
   vegan: "Vegan",
   healthy: "General Healthy",
+  fasting: "Intermittent Fasting",
 };
 
 const tips = [
@@ -37,6 +39,7 @@ const steps = ["Reading profile", "Calculating calories", "Selecting meals", "Bu
 
 // Removed demoPlan - now inline in generate for unique across plan
 
+
 const calcCalories = (weight: number, height: number, age: number, gender: string, activity: string, goal: DietGoal) => {
   const bmr = gender === "female"
     ? 10 * weight + 6.25 * height - 5 * age - 161
@@ -45,6 +48,7 @@ const calcCalories = (weight: number, height: number, age: number, gender: strin
   let cals = bmr * (mult[activity] ?? 1.55);
   if (goal === "weight_loss") cals -= 400;
   if (goal === "muscle_gain") cals += 350;
+  if (goal === "fasting") cals -= 600; // More deficit for fasting
   return Math.round(cals / 10) * 10;
 };
 
@@ -106,6 +110,7 @@ const Planner = () => {
         muscle_gain: ["Breakfast: Eggs, toast & peanut butter — 550 kcal", "Lunch: Chicken rice bowl — 700 kcal", "Snack: Protein shake — 200 kcal", "Dinner: Beef with sweet potato — 650 kcal"],
         vegan: ["Breakfast: Smoothie bowl with fruits — 350 kcal", "Lunch: Lentil curry with rice — 500 kcal", "Snack: Hummus with vegetables — 180 kcal", "Dinner: Tofu stir fry — 450 kcal"],
         healthy: ["Breakfast: Avocado toast with eggs — 400 kcal", "Lunch: Mediterranean salad with chicken — 480 kcal", "Snack: Mixed nuts — 160 kcal", "Dinner: Grilled salmon with vegetables — 450 kcal"],
+        fasting: ["Breakfast: Black Coffee — 0 kcal", "Lunch: Water with Lemon — 5 kcal", "Snack: Herbal Tea — 0 kcal", "Dinner: Green Tea — 0 kcal"],
       };
       const fbMeals = fallback[goal];
       allMeals = Array(dayCount * 4).fill(0).flatMap(() => [...fbMeals]); // Repeat cycle for fallback
